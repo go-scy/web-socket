@@ -1,9 +1,7 @@
 package app
 
 import (
-	"fmt"
 	"github.com/gorilla/mux"
-	"net/http"
 )
 
 var Router *mux.Router
@@ -23,10 +21,7 @@ func newServer() server {
 }
 
 func (s server) registerRoutes() *mux.Router {
-	s.Router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, http.StatusOK)
-	})
-	s.Router.HandleFunc("/home", HomeHandler)
+	s.Router.HandleFunc("/", HomeHandler)
 	s.Router.HandleFunc("/ws", WebSocketEndpoint)
 
 	return s.Router

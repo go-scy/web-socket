@@ -4,18 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>Abbie's Personal Site</title>
-
-  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 
 <body>
   <h1>SY's Profile</h1>
   <p><strong>Graduate student of TEST</strong></p>
-  <ul>
-    <li><strong><a href="education.html">Education</a></strong></li>
-    <li><strong><a href="experience.html">Experiences</a></strong></li>
-  </ul>
   <hr>
   <form class="" action="mailto:joe@example.com" method="post" enctype="text/plain">
     <label for="">Your Name:</label>
@@ -27,4 +21,14 @@
   </form>
 </body>
 
+<script>
+    let socket = null;
+
+    document.addEventListener("DOMContentLoaded", function(){
+        socket = new WebSocket("ws://127.0.0.1:8080/ws")
+        socket.onopen = () => {
+            console.log("Successfully connected");
+        }
+    })
+</script>
 </html>
