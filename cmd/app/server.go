@@ -6,20 +6,28 @@ import (
 	"net/http"
 )
 
+var Router *mux.Router
+
 type server struct {
 	*mux.Router
 }
 
-var DefaultServer server
-
 func init() {
-	DefaultServer.Router = mux.NewRouter()
-	DefaultServer.registerRoutes()
+	Router = newServer().registerRoutes()
 }
 
-func (s server) registerRoutes() {
+func newServer() server {
+	return server{
+		mux.NewRouter(),
+	}
+}
+
+func (s server) registerRoutes() *mux.Router {
 	s.Router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, http.StatusOK)
 	})
 	s.Router.HandleFunc("/home", HomeHandler)
+	s.Router.HandleFunc("/ws", WebSocketEndpoint)
+
+	return s.Router
 }

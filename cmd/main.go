@@ -8,7 +8,7 @@ import (
 func main() {
 	s := http.Server{
 		Addr:    ":8080",
-		Handler: app.DefaultServer.Router,
+		Handler: app.Router,
 	}
 
 	s.ListenAndServe()
